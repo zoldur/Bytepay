@@ -6,7 +6,7 @@ CONFIGFOLDER='/root/.bytepay'
 COIN_DAEMON='bytepayd'
 COIN_CLI='bytepayd'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/bytepaydev/Bytepay/files/1970464/bytepayd.gz'
+COIN_TGZ='https://github.com/zoldur/Bytepay/releases/download/v1.1.0.3/bytepay.tar.gz'
 COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
 COIN_NAME='Bytepay'
 COIN_PORT=51471
@@ -24,10 +24,8 @@ function download_node() {
   echo -e "Download $COIN_NAME binaries"
   cd $TMP_FOLDER
   wget -q $COIN_TGZ
-  gunzip $COIN_ZIP >/dev/null 2>&1
+  tar xvzf $COIN_ZIP -C $COIN_PATH >/dev/null 2>&1
   compile_error
-  cp $COIN_DAEMON $COIN_PATH
-  chmod +x $COIN_PATH$COIN_DAEMON
   cd - >/dev/null 2>&1
   rm -r $TMP_FOLDER >/dev/null 2>&1
   clear
